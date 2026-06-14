@@ -4,6 +4,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.entity.User;
+import org.example.repository.UserRepository;
 import org.example.util.JwtUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,9 +17,11 @@ import java.util.ArrayList;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
 
-    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
+    public JwtAuthenticationFilter(JwtUtil jwtUtil, UserRepository userRepository) {
         this.jwtUtil = jwtUtil;
+        this.userRepository=userRepository;
     }
 
     @Override
@@ -28,11 +32,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             if (token != null && jwtUtil.isTokenValid(token)) {
                 String username = jwtUtil.extractUsername(token);
-                Long userId = jwtUtil.extractUserId(token);
+                User user=userRepository.findByUsername(username)
+                        .orElseThrow(()-> new IllegalArgumentException("User not found"));
+
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
-                authentication.setDetails(userId); // Store userId in details for later use
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
