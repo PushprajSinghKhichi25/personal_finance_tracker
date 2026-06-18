@@ -76,16 +76,16 @@ export default function Dashboard() {
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-gray-500 text-sm font-semibold uppercase">Total Balance</h2>
             <p className={`text-3xl font-bold mt-2 ${balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-              ${balance.toFixed(2)}
+             ₹{balance.toFixed(2)}
             </p>
           </div>
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-gray-500 text-sm font-semibold uppercase">This Month Income</h2>
-            <p className="text-3xl font-bold text-green-600 mt-2">${totalIncome.toFixed(2)}</p>
+            <p className="text-3xl font-bold text-green-600 mt-2">₹{totalIncome.toFixed(2)}</p>
           </div>
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-gray-500 text-sm font-semibold uppercase">This Month Expenses</h2>
-            <p className="text-3xl font-bold text-red-600 mt-2">${totalExpenses.toFixed(2)}</p>
+            <p className="text-3xl font-bold text-red-600 mt-2">₹{totalExpenses.toFixed(2)}</p>
           </div>
         </div>
 

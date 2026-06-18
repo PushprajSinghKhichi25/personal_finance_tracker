@@ -25,8 +25,8 @@ export default function BudgetList({ budgets, budgetSpent, onEdit, onDelete, isL
 
   const getStatusText = (spent: number, limit: number) => {
     const remaining = limit - spent;
-    if (remaining < 0) return `Over by $${Math.abs(remaining).toFixed(2)}`;
-    return `$${remaining.toFixed(2)} remaining`;
+    if (remaining < 0) return `Over by ₹${Math.abs(remaining).toFixed(2)}`;
+    return `₹${remaining.toFixed(2)} remaining`;
   };
 
   if (budgets.length === 0) {
@@ -81,7 +81,7 @@ export default function BudgetList({ budgets, budgetSpent, onEdit, onDelete, isL
             <div className="flex justify-between items-center text-sm">
               <div>
                 <span className="font-semibold text-gray-900">
-                  ${spent.toFixed(2)} / ${budget.monthlyLimit.toFixed(2)}
+                  ₹{spent.toFixed(2)} / ${budget.monthlyLimit.toFixed(2)}
                 </span>
               </div>
               <div className={`text-sm font-medium ${spent > budget.monthlyLimit ? 'text-red-600' : 'text-green-600'}`}>

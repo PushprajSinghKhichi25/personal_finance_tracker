@@ -44,7 +44,7 @@ export default function IncomeList({ incomeList, onEdit, onDelete, isLoading = f
               <td className="px-6 py-4 text-sm text-gray-900">{item.description}</td>
               <td className="px-6 py-4 text-sm text-gray-600">{item.source}</td>
               <td className="px-6 py-4 text-sm font-semibold text-green-600">
-                +${item.amount.toFixed(2)}
+                +₹{item.amount.toFixed(2)}
               </td>
               <td className="px-6 py-4 text-sm">
                 <div className="flex gap-2">

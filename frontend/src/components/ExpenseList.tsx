@@ -52,7 +52,7 @@ export default function ExpenseList({ expenses, onEdit, onDelete, isLoading = fa
                 </div>
               </td>
               <td className="px-6 py-4 text-sm font-semibold text-gray-900">
-                ${expense.amount.toFixed(2)}
+                ₹{expense.amount.toFixed(2)}
               </td>
               <td className="px-6 py-4 text-sm">
                 <div className="flex gap-2">
