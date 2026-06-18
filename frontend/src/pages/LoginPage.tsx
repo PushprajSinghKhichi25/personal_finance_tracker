@@ -18,8 +18,8 @@ export default function LoginPage() {
 
     try {
       const response = await authService.login({ username, password });
-      setUser(response.user);
-      setToken(response.token);
+      setUser({id: response.id, username: response.username, email: response.email});
+      setToken(response.accessToken);
       navigate('/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');

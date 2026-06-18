@@ -26,8 +26,8 @@ export default function RegisterPage() {
 
     try {
       const response = await authService.register({ username, email, password });
-      setUser(response.user);
-      setToken(response.token);
+      setUser({id: response.id, username: response.username, email: response.email});
+      setToken(response.accessToken);
       navigate('/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Registration failed. Please try again.');

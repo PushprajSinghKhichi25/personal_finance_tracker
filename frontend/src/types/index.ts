@@ -6,8 +6,12 @@ export interface User {
 }
 
 export interface AuthResponse {
-  token: string;
-  user: User;
+  id:number;
+  username:string;
+  email:string;
+  accessToken:string;
+  refreshToken?:string;
+  tokenType: string;
 }
 
 export interface LoginRequest {
