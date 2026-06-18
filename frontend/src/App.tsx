@@ -7,6 +7,7 @@ import Dashboard from '@/pages/Dashboard';
 import ExpensesPage from '@/pages/ExpensesPage';
 import IncomePage from '@/pages/IncomePage';
 import BudgetsPage from '@/pages/BudgetsPage';
+import CategoriesPage from '@/pages/CategoriesPage';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
 function App() {
@@ -52,6 +53,14 @@ function App() {
               <BudgetsPage />
             </ProtectedRoute>
           }
+        />
+        <Route
+        path="/categories"
+        element={
+            <ProtectedRoute>
+            <CategoriesPage />
+            </ProtectedRoute>
+            }
         />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
       </Routes>

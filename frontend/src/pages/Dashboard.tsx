@@ -91,6 +91,7 @@ export default function Dashboard() {
 
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-6">Quick Actions</h2>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button
               onClick={() => navigate('/expenses')}
@@ -109,7 +110,13 @@ export default function Dashboard() {
               className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition font-semibold"
             >
               Manage Budgets
-            </button>
+           </button>
+            <button
+              onClick={() => navigate('/categories')}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition font-semibold"
+            >
+              Manage Categories
+              </button>
           </div>
         </div>
       </main>

@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.dto.CategoryResponse;
+import org.example.dto.CreateCategoryRequest;
 import org.example.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +30,8 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> createCategory(
-            @RequestParam String name,
-            @RequestParam(required = false) String description
-    ) {
-        CategoryResponse response = categoryService.createCategory(name, description);
+    public ResponseEntity<CategoryResponse> createCategory(@RequestBody CreateCategoryRequest request) {
+        CategoryResponse response = categoryService.createCategory(request.getName(), request.getDescription());
         return ResponseEntity.status(201).body(response);
     }
 }
