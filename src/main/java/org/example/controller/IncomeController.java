@@ -4,6 +4,7 @@ import org.example.dto.IncomeRequest;
 import org.example.dto.IncomeResponse;
 import org.example.entity.User;
 import org.example.service.IncomeService;
+import org.example.util.SecurityUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +30,8 @@ public class IncomeController {
             @Valid @RequestBody IncomeRequest request,
             Authentication authentication
     ) {
-        User user = (User) authentication.getPrincipal();
+        //User user = (User) authentication.getPrincipal();
+        User user = SecurityUtil.extractUser(authentication);
         IncomeResponse response = incomeService.createIncome(user, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -39,7 +41,7 @@ public class IncomeController {
             @PathVariable Long id,
             Authentication authentication
     ) {
-        User user = (User) authentication.getPrincipal();
+        User user = SecurityUtil.extractUser(authentication);
         IncomeResponse response = incomeService.getIncomeById(id, user);
         return ResponseEntity.ok(response);
     }
@@ -52,7 +54,7 @@ public class IncomeController {
             @RequestParam(required = false) LocalDate endDate,
             Authentication authentication
     ) {
-        User user = (User) authentication.getPrincipal();
+        User user = SecurityUtil.extractUser(authentication);
         Pageable pageable = PageRequest.of(page, size);
 
         Page<IncomeResponse> response;
@@ -71,7 +73,8 @@ public class IncomeController {
             @Valid @RequestBody IncomeRequest request,
             Authentication authentication
     ) {
-        User user = (User) authentication.getPrincipal();
+        User user = SecurityUtil.extractUser(authentication);
+
         IncomeResponse response = incomeService.updateIncome(id, user, request);
         return ResponseEntity.ok(response);
     }
@@ -81,7 +84,8 @@ public class IncomeController {
             @PathVariable Long id,
             Authentication authentication
     ) {
-        User user = (User) authentication.getPrincipal();
+        User user = SecurityUtil.extractUser(authentication);
+
         incomeService.deleteIncome(id, user);
         return ResponseEntity.noContent().build();
     }

@@ -3,25 +3,28 @@ import { Expense, ExpenseRequest, ApiResponse } from '@/types';
 
 export const expenseService = {
   createExpense: async (data: ExpenseRequest): Promise<Expense> => {
-    const response = await api.post<ApiResponse<Expense>>('/expenses', data);
-    return response.data.data;
+    const response = await api.post<Expense>('/expenses', data);
+    return response.data;
   },
 
   getExpenses: async (page = 0, size = 10): Promise<{ content: Expense[]; totalElements: number }> => {
-    const response = await api.get<ApiResponse<{ content: Expense[]; totalElements: number }>>('/expenses', {
+    const response = await api.get<any>('/expenses', {
       params: { page, size },
     });
-    return response.data.data;
+    return {
+        content: response.data.content,
+        totalElements:response.data.totalElements,
+        };
   },
 
   getExpenseById: async (id: number): Promise<Expense> => {
-    const response = await api.get<ApiResponse<Expense>>(`/expenses/${id}`);
-    return response.data.data;
+    const response = await api.get<Expense>(`/expenses/${id}`);
+    return response.data;
   },
 
   updateExpense: async (id: number, data: ExpenseRequest): Promise<Expense> => {
-    const response = await api.put<ApiResponse<Expense>>(`/expenses/${id}`, data);
-    return response.data.data;
+    const response = await api.put<Expense>(`/expenses/${id}`, data);
+    return response.data;
   },
 
   deleteExpense: async (id: number): Promise<void> => {
@@ -29,7 +32,7 @@ export const expenseService = {
   },
 
   getCategories: async () => {
-    const response = await api.get<ApiResponse<any>>('/categories');
-    return response.data.data;
+    const response = await api.get<any>('/categories');
+    return response.data;
   },
 };
