@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { useNavigate } from 'react-router-dom';
-import { LogOut } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import AIInsightsCard from '@/components/AIInsightsCard';
 import { expenseService } from '@/services/expenseService';
 import { incomeService } from '@/services/incomeService';
 
@@ -42,41 +43,18 @@ export default function Dashboard() {
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
-
   const balance = totalIncome - totalExpenses;
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-gray-900">Personal Finance Tracker</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-700">Welcome, {user?.username}</span>
-              <button
-                onClick={handleLogout}
-                className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
-              >
-                <LogOut size={20} />
-                <span>Logout</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-gray-500 text-sm font-semibold uppercase">Total Balance</h2>
             <p className={`text-3xl font-bold mt-2 ${balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-             ₹{balance.toFixed(2)}
+              ₹{balance.toFixed(2)}
             </p>
           </div>
           <div className="bg-white rounded-lg shadow p-6">
@@ -89,10 +67,13 @@ export default function Dashboard() {
           </div>
         </div>
 
+        <div className="mb-8">
+          <AIInsightsCard onViewFull={() => navigate('/ai-insights')} />
+        </div>
+
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-6">Quick Actions</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <button
               onClick={() => navigate('/expenses')}
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition font-semibold"
@@ -110,13 +91,21 @@ export default function Dashboard() {
               className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition font-semibold"
             >
               Manage Budgets
-           </button>
+            </button>
             <button
               onClick={() => navigate('/categories')}
               className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition font-semibold"
             >
               Manage Categories
-              </button>
+            </button>
+          </div>
+          <div className="mt-4 pt-4 border-t">
+            <button
+              onClick={() => navigate('/ai-insights')}
+              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 py-3 rounded-lg transition font-semibold"
+            >
+              View AI Insights & Recommendations
+            </button>
           </div>
         </div>
       </main>

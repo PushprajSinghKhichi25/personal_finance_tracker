@@ -34,3 +34,25 @@ logging:
     root: INFO
     org.springframework.security: DEBUG
     org.hibernate.SQL: DEBUG
+
+
+# Google Gemini AI Configuration
+gemini:
+  api-key: ${GOOGLE_API_KEY:}
+  model: gemini-2.0-flash
+  max-tokens: 1500
+  timeout-seconds: 30
+  temperature: 0.7
+
+# AI Service Configuration
+ai:
+  provider: gemini
+  cache:
+    enabled: true
+    ttl-days: 30
+  rate-limit:
+    requests-per-minute: 60
+    monthly-token-limit: 1000000
+  fallback:
+    enabled: true
+    use-template-insights: true

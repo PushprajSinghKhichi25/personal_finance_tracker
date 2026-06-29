@@ -8,6 +8,8 @@ import ExpensesPage from '@/pages/ExpensesPage';
 import IncomePage from '@/pages/IncomePage';
 import BudgetsPage from '@/pages/BudgetsPage';
 import CategoriesPage from '@/pages/CategoriesPage';
+import AIInsightsDashboard from '@/pages/AIInsightsDashboard';
+import SettingsPage from '@/pages/SettingsPage';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
 function App() {
@@ -55,12 +57,28 @@ function App() {
           }
         />
         <Route
-        path="/categories"
-        element={
+          path="/categories"
+          element={
             <ProtectedRoute>
-            <CategoriesPage />
+              <CategoriesPage />
             </ProtectedRoute>
-            }
+          }
+        />
+        <Route
+          path="/ai-insights"
+          element={
+            <ProtectedRoute>
+              <AIInsightsDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <SettingsPage />
+            </ProtectedRoute>
+          }
         />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
       </Routes>
